@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-gh-pages/static/css/main.690d64d2.css",
-    "main.js": "/react-gh-pages/static/js/main.cd78f3d1.js",
-    "index.html": "/react-gh-pages/index.html",
-    "main.690d64d2.css.map": "/react-gh-pages/static/css/main.690d64d2.css.map",
-    "main.cd78f3d1.js.map": "/react-gh-pages/static/js/main.cd78f3d1.js.map"
+    "main.css": "/investment-calculator/static/css/main.690d64d2.css",
+    "main.js": "/investment-calculator/static/js/main.7e1d3cc6.js",
+    "index.html": "/investment-calculator/index.html",
+    "main.690d64d2.css.map": "/investment-calculator/static/css/main.690d64d2.css.map",
+    "main.7e1d3cc6.js.map": "/investment-calculator/static/js/main.7e1d3cc6.js.map"
   },
   "entrypoints": [
     "static/css/main.690d64d2.css",
-    "static/js/main.cd78f3d1.js"
+    "static/js/main.7e1d3cc6.js"
   ]
 }

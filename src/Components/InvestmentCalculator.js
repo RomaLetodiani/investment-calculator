@@ -5,78 +5,47 @@ import Header from './Header';
 import Form from './Form';
 
 const InvestmentCalculator = () => {
-  const [userInput, setUserInput] = useState({
-    currentSavings: '',
-    yearlyCont: '',
-    expectedReturn: '',
-    duration: '',
-  });
+  const [userInput, setUserInput] = useState(null);
 
-  const [yearlyData, setYearlyData] = useState([]);
-
-  const onReset = () => {
-    setUserInput({
-      currentSavings: '',
-      yearlyCont: '',
-      expectedReturn: '',
-      duration: '',
-    });
-    setYearlyData([]);
+  const calculateHandler = (userInput) => {
+    setUserInput(userInput);
   };
 
-  const onCalculate = (e) => {
-    e.preventDefault();
+  const yearlyData = [];
 
-    if (userInput) {
-      let currentSavings = +userInput.currentSavings;
-      const yearlyContribution = +userInput.yearlyCont;
-      const expectedReturn = +userInput.expectedReturn / 100;
-      const duration = +userInput.duration;
+  if (userInput) {
+    let currentSavings = +userInput['current-savings']; // feel free to change the shape of this input object!
+    const yearlyContribution = +userInput['yearly-contribution']; // as mentioned: feel free to change the shape...
+    const expectedReturn = +userInput['expected-return'] / 100;
+    const duration = +userInput['duration'];
 
-      const calculatedData = [];
-
-      for (let i = 0; i < duration; i++) {
-        const yearlyInterest = currentSavings * expectedReturn;
-        currentSavings += yearlyInterest + yearlyContribution;
-        calculatedData.push({
-          year: i + 1,
-          yearlyInterest: yearlyInterest,
-          savingsEndOfYear: currentSavings,
-          yearlyContribution: yearlyContribution,
-        });
-      }
-
-      setYearlyData(calculatedData);
-      setUserInput({
-        currentSavings: '',
-        yearlyCont: '',
-        expectedReturn: '',
-        duration: '',
+    for (let i = 0; i < duration; i++) {
+      const yearlyInterest = currentSavings * expectedReturn;
+      currentSavings += yearlyInterest + yearlyContribution;
+      yearlyData.push({
+        year: i + 1,
+        yearlyInterest: yearlyInterest,
+        savingsEndOfYear: currentSavings,
+        yearlyContribution: yearlyContribution,
       });
     }
-  };
+  }
 
   return (
-    <div className="w-full p-5 min-h-screen min-w-[280px] bg-[#1FA2A5] text-[#fff] flex justify-center items-center">
-      <div className="max-w-[850px] flex flex-col justify-center">
+    <div className="w-full p-5 overflow-hidden min-h-screen min-w-[280px] bg-[#1FA2A5] text-[#fff] flex justify-center items-center">
+      <div className="max-w-[850px] flex flex-col justify-center items-center">
         <Header />
-        <Form
-          userInput={userInput}
-          setUserInput={setUserInput}
-          onCalculate={onCalculate}
-          onReset={onReset}
-        />
-        {yearlyData.length <= 0 ? (
+        <Form onCalculate={calculateHandler} />
+        {!userInput && (
           <p className=" text-center">
             Please fill out the details above for me to calculate.
           </p>
-        ) : (
-          userInput && (
-            <TableDiv
-              data={yearlyData}
-              initialInvestment={userInput.currentSavings}
-            />
-          )
+        )}
+        {userInput && (
+          <TableDiv
+            data={yearlyData}
+            initialInvestment={userInput['current-savings']}
+          />
         )}
       </div>
     </div>

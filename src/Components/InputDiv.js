@@ -3,7 +3,6 @@ import React from 'react';
 const InputDiv = ({ title, setVal, val, objKey }) => {
   const onChangeHandler = (e) => {
     setVal((prev) => {
-      console.log(prev);
       return {
         ...prev,
         [objKey]: +e.target.value,
@@ -19,7 +18,9 @@ const InputDiv = ({ title, setVal, val, objKey }) => {
         onChange={onChangeHandler}
         value={val[objKey] || ''}
         type="number"
-        className="w-full outline-none rounded-full bg-transparent border-2 px-5 p-2 text-xl"
+        className={`outline-none rounded-full bg-transparent border-2 ${
+          val[objKey] > 0 ? '' : 'border-red-500'
+        }  px-5 p-2 text-xl`}
       />
     </div>
   );

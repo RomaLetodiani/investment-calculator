@@ -9,7 +9,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 });
 
 const TableDiv = ({ data, initialInvestment }) => {
-  return (
+  return data.length > 0 ? (
     <Table className="result">
       <thead>
         <tr>
@@ -42,6 +42,11 @@ const TableDiv = ({ data, initialInvestment }) => {
         ))}
       </tbody>
     </Table>
+  ) : (
+    <p className=" text-center">
+      Please type the valid Investment Duration (years) above for me to
+      calculate.
+    </p>
   );
 };
 
